@@ -1049,6 +1049,19 @@ add_meta_data(
 )
 
 add_meta_data(
+    Aircraft.Design.FIXED_RESERVES_FUEL,
+    meta_data=_MetaData,
+    historical_name={"GASP": 'INGASP.FRESF',
+                     "FLOPS": None,
+                     "LEAPS1": None
+                     },
+    option=True,
+    units="lbm",
+    desc='required fuel reserves: directly in lbm',
+    default_value=0,
+)
+
+add_meta_data(
     Aircraft.Design.FIXED_USEFUL_LOAD,
     meta_data=_MetaData,
     historical_name={"GASP": 'INGASP.WFUL',
@@ -1057,18 +1070,6 @@ add_meta_data(
                      },
     units='lbm',
     desc='total mass of fixed useful load: crew, service items, trapped oil, etc',
-)
-
-add_meta_data(
-    Aircraft.Design.IJEFF,
-    meta_data=_MetaData,
-    historical_name={"GASP": 'INGASP.ijeff',
-                     "FLOPS": None,
-                     "LEAPS1": None
-                     },
-    desc="A flag used by Jeff V. Bowles to debug GASP code during his 53 years supporting the development of GASP. \
-        This flag is planted here to thank him for his hard work and dedication, Aviary wouldn't be what it is today \
-        without his help.",
 )
 
 add_meta_data(
@@ -1197,16 +1198,18 @@ add_meta_data(
 )
 
 add_meta_data(
-    Aircraft.Design.RESERVES,
+    Aircraft.Design.RESERVES_FRACTION,
     meta_data=_MetaData,
-    historical_name={"GASP": 'INGASP.FRESF',
+    historical_name={"GASP": None,
                      "FLOPS": None,
                      "LEAPS1": None
                      },
     option=True,
     units="unitless",
-    desc='required fuel reserves: given either as a proportion of mission fuel'
-    '(<0) or directly in lbf (>10)',
+    desc='required fuel reserves: given as a proportion of mission fuel. This value must be nonnegative.\
+          If it is 0.5, the reserve fuel is half of the mission fuel (one third of the total fuel). Note\
+          it can be greater than 1. If it is 2, there would be twice as much reserve fuel as mission fuel\
+          (the total fuel carried would be 1/3 for the mission and 2/3 for the reserve)',
     default_value=0,
 )
 
